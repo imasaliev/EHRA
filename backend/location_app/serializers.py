@@ -8,10 +8,11 @@ class LocationSerializer(ModelSerializer):
 
     class Meta:
         model = Location
-        fields = ['id', 'name', 'address', 'active', 'equipments']
+        fields = ['id', 'provider_id', 'name',
+                  'address', 'active', 'equipments']
 
 
 class LocationOnlySerializer(ModelSerializer):
     class Meta:
         model = Location
-        fields = ['id', 'name', 'address', 'active']
+        fields = ['id', 'provider_id', 'name', 'address', 'active']

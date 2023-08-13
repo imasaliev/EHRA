@@ -1,10 +1,10 @@
 from rest_framework.serializers import ModelSerializer
 from .models import User
-from location_app.serializers import LocationOnlySerializer
+from location_app.serializers import LocationOnlySerializer, LocationSerializer
 
 
 class UserSerializer(ModelSerializer):
-    locations = LocationOnlySerializer(many=True)
+    locations = LocationSerializer(many=True)
 
     class Meta:
         model = User

@@ -6,8 +6,10 @@ from provider_app.models import Provider
 
 
 class Location(models.Model):
-    user_id = models.ForeignKey(User, on_delete=models.RESTRICT)
-    provider_id = models.ForeignKey(Provider, on_delete=models.RESTRICT)
+    user_id = models.ForeignKey(
+        User, on_delete=models.RESTRICT, related_name="locations")
+    provider_id = models.ForeignKey(
+        Provider, on_delete=models.RESTRICT, related_name="locations")
     name = models.CharField(unique=True)
     address = models.CharField(blank=True, null=True)
     active = models.BooleanField(default=True)
