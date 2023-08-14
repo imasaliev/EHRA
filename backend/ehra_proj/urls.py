@@ -16,9 +16,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from .views import Comed_api
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path("comedapi", Comed_api),
     path('api/users/', include('user_app.urls')),
     path('api/locations/', include('location_app.urls'))
 ]
