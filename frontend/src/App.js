@@ -303,7 +303,6 @@ function App() {
     { millisUTC: "1691901900000", price: "2.0" },
     { millisUTC: "1691901600000", price: "2.3" },
   ];
-  dates = dates.reverse().map((x) => [x.millisUTC - 18000000, x.price]);
   let mib_uname = "Islomjon";
   const [chartState, setChartState] = useState({
     options: {
@@ -323,12 +322,6 @@ function App() {
         },
       },
     },
-    series: [
-      {
-        name: "series1",
-        data: dates,
-      },
-    ],
   });
 
   return (
@@ -373,7 +366,14 @@ function App() {
             <Col>
               <Chart
                 options={chartState.options}
-                series={chartState.series}
+                series={[
+                  {
+                    name: "series1",
+                    data: (false ? dates : dates)
+                      .reverse()
+                      .map((x) => [x.millisUTC - 18000000, x.price]),
+                  },
+                ]}
                 type="line"
               />
             </Col>
