@@ -1,10 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { userContext } from "../App";
 import { api } from "../utilities";
 import { useNavigate, useOutletContext } from "react-router-dom";
+import AppContext from "../contexts/AppContext";
 
 export default function LogInPage() {
-  const { appUser, setAppUser } = useOutletContext();
+  const { appUser, setAppUser } = useContext(AppContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -29,7 +30,7 @@ export default function LogInPage() {
     let token = response.data.token;
     setAppUser(user);
     localStorage.setItem("token", token);
-    navigate("/home");
+    navigate("/");
   };
 
   return (

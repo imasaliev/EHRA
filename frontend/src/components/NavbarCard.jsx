@@ -1,4 +1,4 @@
-import React from "react";
+import { useContext } from "react";
 import logo from "../img/logo192.png";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
@@ -7,14 +7,19 @@ import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 import Card from "react-bootstrap/Card";
 import Image from "react-bootstrap/Image";
-// import Chart from "react-apexcharts";
 import Col from "react-bootstrap/Col";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import AppContext from "../contexts/AppContext";
 
-export default function NavbarCard({ appUser }) {
+export default function NavbarCard() {
+  const { appUser, setAppUser } = useContext(AppContext);
+  useEffect(() => {
+    console.log("navbar");
+    console.log(appUser);
+  }, [appUser]);
   return (
     <Navbar bg="dark" variant="dark" expand="lg">
       <Container>
@@ -39,7 +44,9 @@ export default function NavbarCard({ appUser }) {
                 {mib_uname ? `Signed in as: ${mib_uname}` : null}
               </Navbar.Text> */}
 
-          <Button>{appUser ? `${appUser.first_name}` : `SIGNUP`}</Button>
+          <Button>
+            {appUser ? `Welcome ${appUser.first_name}!` : `SIGNUP`}
+          </Button>
           <Button>{appUser ? `LOGOUT` : `LOGIN`}</Button>
         </Navbar.Collapse>
       </Container>
