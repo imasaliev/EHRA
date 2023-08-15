@@ -9,7 +9,6 @@ def Comed_api(request):
     else:
         r = requests.get(
             'https://hourlypricing.comed.com/api?type=5minutefeed', params=request.GET)
-    print(type(r.json()))
     if r.status_code == 200:
         return HttpResponse(r)
     return HttpResponse('Could not save data')

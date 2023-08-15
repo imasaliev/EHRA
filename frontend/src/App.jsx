@@ -4,7 +4,7 @@ import { Outlet } from "react-router-dom";
 import NavbarCard from "./components/NavbarCard";
 
 export default function App() {
-  const [appUser, setAppUser] = useState("1");
+  const [appUser, setAppUser] = useState("");
   return (
     <>
       <NavbarCard appUser={appUser} />

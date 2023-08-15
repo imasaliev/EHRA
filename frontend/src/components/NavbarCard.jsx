@@ -39,9 +39,8 @@ export default function NavbarCard({ appUser }) {
                 {mib_uname ? `Signed in as: ${mib_uname}` : null}
               </Navbar.Text> */}
 
-          <Button>
-            {appUser ? `${appUser.first_name} - Logout` : `Enroll/Login`}
-          </Button>
+          <Button>{appUser ? `${appUser.first_name}` : `SIGNUP`}</Button>
+          <Button>{appUser ? `LOGOUT` : `LOGIN`}</Button>
         </Navbar.Collapse>
       </Container>
     </Navbar>
