@@ -6,6 +6,9 @@ import AppContext from "./contexts/AppContext";
 
 export default function App() {
   const [appUser, setAppUser] = useState("");
+  const [currentPrice, setCurrentPrice] = useState(null);
+  const [loading, setLoading] = useState(true); // Loading state flag
+
   return (
     <AppContext.Provider
       value={{
@@ -14,8 +17,17 @@ export default function App() {
       }}
     >
       <NavbarCard />
-      <div className="main-page-contents">
-        <Outlet context={{ appUser, setAppUser }} />
+      <div className="bg-secondary">
+        <Outlet
+          context={{
+            appUser,
+            setAppUser,
+            currentPrice,
+            setCurrentPrice,
+            loading,
+            setLoading,
+          }}
+        />
       </div>
     </AppContext.Provider>
 

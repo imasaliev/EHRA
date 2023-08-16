@@ -21,7 +21,7 @@ export default function NavbarCard() {
     console.log(appUser);
   }, [appUser]);
   return (
-    <Navbar bg="dark" variant="dark" expand="lg">
+    <Navbar className="bg-dark text-light" expand="lg">
       <Container>
         <Navbar.Brand href="#home">
           <img
@@ -36,8 +36,12 @@ export default function NavbarCard() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
           <Nav className="me-auto">
-            <Nav.Link href="#link">FAQ</Nav.Link>
-            <Nav.Link href="#link">Contact Us</Nav.Link>
+            <Nav.Link className="bg-dark text-light" href="#link">
+              FAQ
+            </Nav.Link>
+            <Nav.Link className="bg-dark text-light" href="#link">
+              Contact Us
+            </Nav.Link>
           </Nav>
 
           {/* <Navbar.Text>
