@@ -54,19 +54,28 @@ export default function HomePage() {
 
   useEffect(() => {
     // const apiUrl = "http://127.0.0.1:8000/comedapi";
+    const fetchData = async () => {
+      try {
+        const response = await api.get("api/comedapi");
 
-    api
-      .get("api/comedapi")
-      .then((response) => {
         setChartData(response.data);
         setCurrentPrice(response.data[0].price);
+
         setLoading(false); // Set loading state to false on successful response
-      })
-      .catch((error) => {
+      } catch (error) {
         setErr(error);
         console.error("Error fetching data:", error);
         setLoading(false); // Set loading state to false on error
-      });
+      }
+    };
+
+    fetchData(); // Fetch data initially
+
+    const interval = setInterval(fetchData, 1000); // Fetch data every 5 seconds
+
+    return () => {
+      clearInterval(interval); // Clear the interval when the component unmounts
+    };
   }, []);
 
   return appUser ? (
@@ -108,7 +117,11 @@ export default function HomePage() {
               ...chartState.options,
 
               title: {
-                text: "COMED CURRENT RATE: " + currentPrice + " cents per kwh",
+                text:
+                  "COMED CURRENT RATE: " +
+                  currentPrice +
+                  " cents per kwh, last update " +
+                  Math.floor(Date.now() / 1000),
                 align: "CENTER",
                 margin: 10,
                 offsetX: 0,
