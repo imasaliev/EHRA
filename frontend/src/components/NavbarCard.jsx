@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import logo from "../img/logo192.png";
+import logo from "../img/logo.svg";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
@@ -13,15 +13,36 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import AppContext from "../contexts/AppContext";
+import Modal from "react-bootstrap/Modal";
 
 export default function NavbarCard() {
   const { appUser, setAppUser } = useContext(AppContext);
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   useEffect(() => {
     console.log("navbar");
     console.log(appUser);
   }, [appUser]);
   return (
-    <Navbar className="bg-dark text-light" expand="lg">
+    <Navbar className="bg-secondary text-light" expand="lg">
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Modal heading</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Woohoo, you are reading this text in a modal!</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleClose}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
       <Container>
         <Navbar.Brand href="#home">
           <img
@@ -36,22 +57,24 @@ export default function NavbarCard() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
           <Nav className="me-auto">
-            <Nav.Link className="bg-dark text-light" href="#link">
+            <Nav.Link className="text-light" href="#link">
               FAQ
             </Nav.Link>
-            <Nav.Link className="bg-dark text-light" href="#link">
+            <Nav.Link className="text-light" href="#link">
               Contact Us
             </Nav.Link>
           </Nav>
 
-          {/* <Navbar.Text>
-                {mib_uname ? `Signed in as: ${mib_uname}` : null}
-              </Navbar.Text> */}
-
-          <Button>
-            {appUser ? `Welcome ${appUser.first_name}!` : `SIGNUP`}
-          </Button>
-          <Button>{appUser ? `LOGOUT` : `LOGIN`}</Button>
+          {appUser ? (
+            <Button onClick={handleShow}>Welcome {appUser.first_name}!</Button>
+          ) : (
+            <Button onClick={handleShow}>SIGNUP</Button>
+          )}
+          {appUser ? (
+            <Button onClick={handleShow}>LOGOUT</Button>
+          ) : (
+            <Button onClick={handleShow}>LOGIN</Button>
+          )}
         </Navbar.Collapse>
       </Container>
     </Navbar>

@@ -12,7 +12,7 @@ export default function EquipmentCard({ equip }) {
         width: "8rem",
         height: "8rem",
       }}
-      className="bg-primary text-white text-center text-nowrap border-warning
+      className="bg-primary text-white text-center text-nowrap border-warning rounded-5
       "
     >
       {/* <Card.Img variant="top" src={logo} /> */}
@@ -28,9 +28,9 @@ export default function EquipmentCard({ equip }) {
               : "bg-danger"
           }
         >
-          {equip.sell_price ? equip.sell_price + "^" : "NA"}
+          {equip.sell_price ? "SELL " + equip.sell_price + "⬆️" : "NA"}
         </Card.Text>
-        <Card.Text>{equip.name} </Card.Text>
+        <Card.Text className="text-uppercase">{equip.name} </Card.Text>
         <Card.Text
           className={
             equip.buy_price === null
@@ -40,7 +40,7 @@ export default function EquipmentCard({ equip }) {
               : "bg-danger"
           }
         >
-          {equip.buy_price ? equip.buy_price + "v" : "NA"}
+          {equip.buy_price ? "BUY " + equip.buy_price + "⬇️" : "NA"}
         </Card.Text>
       </Card.Body>
     </Card>

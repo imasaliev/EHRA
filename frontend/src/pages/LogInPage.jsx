@@ -10,11 +10,6 @@ export default function LogInPage() {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  useEffect(() => {
-    console.log(email);
-    console.log(password);
-  }, [email, password]);
-
   const logIn = async (e) => {
     e.preventDefault();
     let response = await api

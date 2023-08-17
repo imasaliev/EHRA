@@ -19,6 +19,7 @@ export default function App() {
       <NavbarCard />
       <div className="bg-secondary">
         <Outlet
+          className="bg-secondary"
           context={{
             appUser,
             setAppUser,
