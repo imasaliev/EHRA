@@ -1,21 +1,9 @@
-import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
-import Button from "react-bootstrap/Button";
-import Row from "react-bootstrap/Row";
-import Card from "react-bootstrap/Card";
-import Image from "react-bootstrap/Image";
+import { Container, Button, Row, Image, Col, Carousel } from "react-bootstrap";
 import Chart from "react-apexcharts";
-import Col from "react-bootstrap/Col";
-import Carousel from "react-bootstrap/Carousel";
-import NavDropdown from "react-bootstrap/NavDropdown";
-import "bootstrap/dist/css/bootstrap.min.css";
 import { useEffect, useState } from "react";
 import { api } from "../utilities";
 import { useOutletContext } from "react-router-dom";
-import LocationCard from "../components/LocationCard";
 import EquipmentCard from "../components/EquipmentCard";
-import LocationCarousel from "../components/LocationCarousel";
 
 export default function HomePage() {
   const {
@@ -71,48 +59,49 @@ export default function HomePage() {
 
     fetchData(); // Fetch data initially
 
-    const interval = setInterval(fetchData, 1000); // Fetch data every 5 seconds
+    const interval = setInterval(fetchData, 10000); // Fetch data every 10 seconds
 
     return () => {
       clearInterval(interval); // Clear the interval when the component unmounts
     };
-  }, []);
+  }, [setLoading]);
 
-  return appUser ? (
-    <Container>
-      <Carousel interval={null}>
-        {appUser.locations.length
-          ? appUser.locations.map((location) => (
-              <Carousel.Item>
-                <img
-                  src="https://mdbcdn.b-cdn.net/img/Photos/Slides/img%20(22).webp"
-                  alt="Canyon at Nigh"
-                />
-                <Carousel.Caption>
-                  <Row className="justify-content-center">
-                    {location.equipments.length ? (
-                      location.equipments.map((equipment) => (
-                        <EquipmentCard key={equipment.id} equip={equipment} />
-                      ))
-                    ) : (
-                      <h3>No Equpment Yet</h3>
-                    )}
-                  </Row>
-                  <h3>
-                    {location.name} {location.address} {location.provider_id}{" "}
-                  </h3>
-                </Carousel.Caption>
-              </Carousel.Item>
-            ))
-          : null}
-      </Carousel>
-
+  return true ? (
+    <Container className="bg-secondary">
+      {appUser ? (
+        <Carousel interval={null}>
+          {appUser?.locations?.length
+            ? appUser.locations.map((location) => (
+                <Carousel.Item>
+                  <img
+                    src="https://mdbcdn.b-cdn.net/img/Photos/Slides/img%20(22).webp"
+                    alt="Canyon at Nigh"
+                  />
+                  <Carousel.Caption>
+                    <Row className="justify-content-center">
+                      {location.equipments.length ? (
+                        location.equipments.map((equipment) => (
+                          <EquipmentCard key={equipment.id} equip={equipment} />
+                        ))
+                      ) : (
+                        <h3>No Equpment Yet</h3>
+                      )}
+                    </Row>
+                    <h3 className="text-uppercase">
+                      {location.name} {location.address} {currentPrice}
+                      {"C per kwh "}
+                    </h3>
+                  </Carousel.Caption>
+                </Carousel.Item>
+              ))
+            : null}
+        </Carousel>
+      ) : null}
       <h1>{err}</h1>
-
-      <Row aria-disabled={loading}>
+      <Row aria-disabled={loading} className="bg-secondary">
         <Col>
           <Chart
-            className="bg-light"
+            className="bg-secondary"
             options={{
               ...chartState.options,
 
@@ -120,18 +109,18 @@ export default function HomePage() {
                 text:
                   "COMED CURRENT RATE: " +
                   currentPrice +
-                  " cents per kwh, last update " +
-                  Math.floor(Date.now() / 1000),
+                  "C  PER KWH. LAST UPDATE:  " +
+                  new Date().toLocaleString(),
                 align: "CENTER",
                 margin: 10,
                 offsetX: 0,
                 offsetY: 0,
-                floating: false,
+                floating: true,
                 style: {
-                  fontSize: "40 PX",
+                  fontSize: "60 PX",
                   fontWeight: "bold",
                   fontFamily: undefined,
-                  color: "dark",
+                  color: "DARK",
                 },
               },
             }}
@@ -147,8 +136,7 @@ export default function HomePage() {
           />
         </Col>
       </Row>
-
-      <Row hidden={!appUser} className="px-4 my-5">
+      <Row hidden={!appUser} className="px-4 my-5 bg-secondary">
         <Col sm={2}>
           <Image src="https://picsum.photos/700/400" fluid rounded />
         </Col>
