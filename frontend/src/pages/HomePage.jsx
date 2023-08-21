@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { api } from "../utilities";
 import { useOutletContext } from "react-router-dom";
 import EquipmentCard from "../components/EquipmentCard";
+import logo from "../img/logo.svg";
+import NavbarCard from "../components/NavbarCard";
 
 export default function HomePage() {
   const {
@@ -44,7 +46,7 @@ export default function HomePage() {
     // const apiUrl = "http://127.0.0.1:8000/comedapi";
     const fetchData = async () => {
       try {
-        const response = await api.get("api/comedapi");
+        const response = await api.get("api/providers/1/24");
 
         setChartData(response.data);
         setCurrentPrice(response.data[0].price);
@@ -67,18 +69,17 @@ export default function HomePage() {
   }, [setLoading]);
 
   return true ? (
-    <Container className="bg-secondary">
+    <div className="bg-secondary">
+      <NavbarCard />
+
       {appUser ? (
         <Carousel interval={null}>
           {appUser?.locations?.length
-            ? appUser.locations.map((location) => (
+            ? appUser.locations.map((location, index) => (
                 <Carousel.Item>
-                  <img
-                    src="https://mdbcdn.b-cdn.net/img/Photos/Slides/img%20(22).webp"
-                    alt="Canyon at Nigh"
-                  />
+                  <img src={logo} alt="Canyon at Nigh" />
                   <Carousel.Caption>
-                    <Row className="justify-content-center">
+                    <Row>
                       {location.equipments.length ? (
                         location.equipments.map((equipment) => (
                           <EquipmentCard key={equipment.id} equip={equipment} />
@@ -153,6 +154,6 @@ export default function HomePage() {
           <Button variant="outline-danger">❌</Button>
         </Col>
       </Row>
-    </Container>
+    </div>
   ) : null;
 }

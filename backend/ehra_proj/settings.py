@@ -11,6 +11,10 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+from dotenv import dotenv_values
+
+env = dotenv_values(".env")  # sets the value of `env` to an OrderedDictionary
+SECRET_KEY = env.get("SECRET_KEY")  # returns the apikey value from the `.env`
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,7 +24,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-zdc&a$auqlu45b=)$xv74v4lyc5frna0*0#-i#3xv_f7+n1q9a'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True

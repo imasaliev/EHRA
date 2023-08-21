@@ -16,8 +16,8 @@ export default function App() {
         setAppUser,
       }}
     >
-      <NavbarCard />
-      <div className="bg-secondary">
+      {/* <NavbarCard /> */}
+      <div className="vh-100">
         <Outlet
           className="bg-secondary"
           context={{

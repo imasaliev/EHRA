@@ -20,7 +20,8 @@ from .views import Comed_api
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("api/comedapi", Comed_api),
+    path('api/comedapi', Comed_api),
+    path('api/providers/', include('provider_app.urls')),
     path('api/users/', include('user_app.urls')),
     path('api/locations/', include('location_app.urls'))
 ]
