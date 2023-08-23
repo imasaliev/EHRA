@@ -69,7 +69,7 @@ export default function HomePage() {
   }, [setLoading]);
 
   return true ? (
-    <div className="bg-secondary">
+    <div className="container-fluid vh-100 bg-secondary">
       <NavbarCard />
 
       {appUser ? (

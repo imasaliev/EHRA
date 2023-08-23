@@ -17,7 +17,8 @@ import Modal from "react-bootstrap/Modal";
 import { useOutletContext } from "react-router-dom";
 
 export default function NavbarCard() {
-  const { appUser, setAppUser } = useOutletContext();
+  // const { appUser, setAppUser } = useOutletContext();
+  let appUser = "";
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);

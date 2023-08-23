@@ -12,4 +12,3 @@ class Equipment(models.Model):
         max_digits=4, decimal_places=2, null=True, blank=True)
     sell_price = models.DecimalField(
         max_digits=4, decimal_places=2, null=True, blank=True)
-    active = models.BooleanField(default=True)

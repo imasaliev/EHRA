@@ -29,7 +29,7 @@ class Log_in(APIView):
             return Response("Something went wrong", status=HTTP_400_BAD_REQUEST)
 
 
-class Register(APIView):
+class Sign_up(APIView):
     def post(self, request):
         request.data["username"] = request.data["email"]
         user = User.objects.create_user(**request.data)

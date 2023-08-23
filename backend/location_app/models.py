@@ -12,4 +12,3 @@ class Location(models.Model):
         Provider, on_delete=models.RESTRICT, related_name="locations")
     name = models.CharField(unique=True)
     address = models.CharField(blank=True, null=True)
-    active = models.BooleanField(default=True)

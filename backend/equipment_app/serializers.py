@@ -6,4 +6,5 @@ class EquipmentSerializer(ModelSerializer):
 
     class Meta:
         model = Equipment
-        fields = ['id', 'name', 'buy_price', 'sell_price', 'active']
+        fields = ['id', 'location_id', 'name',
+                  'buy_price', 'sell_price']

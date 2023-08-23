@@ -2,9 +2,7 @@ import Card from "react-bootstrap/Card";
 import logo from "../img/logo192.png";
 import { useOutletContext } from "react-router-dom";
 
-export default function EquipmentCard({ equip }) {
-  const { currentPrice } = useOutletContext();
-
+export default function EquipmentCard({ equip, currentPrice }) {
   return (
     <Card
       style={{
