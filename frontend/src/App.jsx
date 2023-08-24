@@ -12,6 +12,8 @@ export default function App() {
     api.defaults.headers.common[
       "Authorization"
     ] = `Token ${localStorage.getItem("token")}`;
+  } else {
+    api.defaults.headers.common["Authorization"] = "";
   }
 
   return (
