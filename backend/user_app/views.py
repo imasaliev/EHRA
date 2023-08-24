@@ -14,8 +14,15 @@ from rest_framework.status import (
 )
 from django.http import HttpResponse
 from .serializers import UserOnlySerializer, UserSerializer
+from django.contrib.auth.hashers import make_password
+
 
 # Create your views here.
+
+
+class User_permissions(APIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
 
 
 class Log_in(APIView):
@@ -39,21 +46,30 @@ class Sign_up(APIView):
         )
 
 
-class Info(APIView):
-    authentication_classes = [TokenAuthentication]
-    permission_classes = [IsAuthenticated]
-
+class Info(User_permissions):
     def get(self, request):
         user = get_object_or_404(User, email=request.user.email)
-        # print(request.__dir__())
-        print(request.user)
         return Response(UserSerializer(user).data)
 
+    def put(self, request):
+        user = get_object_or_404(User, email=request.user.email)
+        User.objects.filter(id=user.id).update(**request.data)
+        user.password = make_password(request.data.get("password"))
+        user.first_name = request.data.get("first_name")
+        user.last_name = request.data.get("last_name")
+        user.email = request.data.get("email")
+        user.username = request.data.get("email")
+        user.save()
 
-class Log_out(APIView):
-    authentication_classes = [TokenAuthentication]
-    permission_classes = [IsAuthenticated]
+        return Response(UserSerializer(user).data)
 
+    def delete(self, request):
+        user = get_object_or_404(User, email=request.user.email)
+        User.objects.filter(id=user.id).delete()
+        return Response(status=HTTP_204_NO_CONTENT)
+
+
+class Log_out(User_permissions):
     def post(self, request):
         request.user.auth_token.delete()
         return Response(status=HTTP_204_NO_CONTENT)

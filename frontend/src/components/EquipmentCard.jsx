@@ -1,44 +1,49 @@
 import Card from "react-bootstrap/Card";
-import logo from "../img/logo192.png";
-import { useOutletContext } from "react-router-dom";
+import EquipmentChange from "../modals/EquipmentChange";
 
-export default function EquipmentCard({ equip, currentPrice }) {
+export default function EquipmentCard({
+  equipment,
+  currentPrice,
+  appUser,
+  setAppUser,
+}) {
   return (
     <Card
       style={{
         padding: 0,
-        width: "8rem",
-        height: "8rem",
+        width: "10rem",
+        height: "10rem",
       }}
-      className="bg-primary text-white text-center text-nowrap border-warning rounded-5
-      "
+      className="bg-primary text-white text-center text-nowrap rounded-5"
     >
-      {/* <Card.Img variant="top" src={logo} /> */}
       <Card.Body>
-        {/* <Card.Text>{equip.sell_price === null ? "true" : "asdf"} </Card.Text> */}
-        {/* <Card.Text>{currentPrice}</Card.Text> */}
         <Card.Text
           className={
-            equip.sell_price === null
+            equipment.sell_price === null
               ? "bg-secondary"
-              : parseFloat(currentPrice) >= parseFloat(equip.sell_price)
+              : parseFloat(currentPrice) >= parseFloat(equipment.sell_price)
               ? "bg-success"
               : "bg-danger"
           }
         >
-          {equip.sell_price ? "SELL " + equip.sell_price + "⬆️" : "NA"}
+          {equipment.sell_price ? "SELL " + equipment.sell_price + "⬆️" : "NA"}
         </Card.Text>
-        <Card.Text className="text-uppercase">{equip.name} </Card.Text>
+        <EquipmentChange
+          equipment={equipment}
+          appUser={appUser}
+          setAppUser={setAppUser}
+        />
+
         <Card.Text
           className={
-            equip.buy_price === null
+            equipment.buy_price === null
               ? "bg-secondary"
-              : parseFloat(currentPrice) <= parseFloat(equip.buy_price)
+              : parseFloat(currentPrice) <= parseFloat(equipment.buy_price)
               ? "bg-success"
               : "bg-danger"
           }
         >
-          {equip.buy_price ? "BUY " + equip.buy_price + "⬇️" : "NA"}
+          {equipment.buy_price ? "BUY " + equipment.buy_price + "⬇️" : "NA"}
         </Card.Text>
       </Card.Body>
     </Card>

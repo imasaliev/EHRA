@@ -1,42 +1,31 @@
-import "bootstrap/dist/css/bootstrap.min.css";
-import { useState } from "react";
-import { Outlet } from "react-router-dom";
+// import "bootstrap/dist/css/bootstrap.min.css";
+import { useEffect, useState } from "react";
 import NavbarCard from "./components/NavbarCard";
-import AppContext from "./contexts/AppContext";
+import LocationCard from "./components/LocationCard";
 
 export default function App() {
-  const [appUser, setAppUser] = useState("");
-  const [currentPrice, setCurrentPrice] = useState(null);
-  const [loading, setLoading] = useState(true); // Loading state flag
+  const [appUser, setAppUser] = useState(
+    JSON.parse(localStorage.getItem("appUser"))
+  );
 
   return (
-    <AppContext.Provider
-      value={{
-        appUser,
-        setAppUser,
-      }}
-    >
-      {/* <NavbarCard /> */}
-      <div className="vh-100">
-        <Outlet
-          className="bg-secondary"
-          context={{
-            appUser,
-            setAppUser,
-            currentPrice,
-            setCurrentPrice,
-            loading,
-            setLoading,
-          }}
-        />
-      </div>
-    </AppContext.Provider>
-
-    // <>
-    //   <NavbarCard appUser={appUser} />
-    //   <div className="main-page-contents">
-    //     <Outlet context={{ appUser, setAppUser }} />
-    //   </div>
-    // </>
+    <div className="container-fluid bg-secondary justify-content-center">
+      <header>
+        <NavbarCard appUser={appUser} setAppUser={setAppUser} />
+      </header>
+      <main>
+        <LocationCard appUser={appUser} setAppUser={setAppUser} />
+      </main>
+      {/* <footer>
+        <br></br>
+        <h1 className="text-center">All rights</h1>
+      </footer> */}
+      <footer className="text-center">
+        <h3>
+          &copy; Copyright 2023. MIB DESIGN. All rights reserved. Powered by
+          DJANGO-POSTGRES-REACT-BOOTSTRAP{" "}
+        </h3>
+      </footer>
+    </div>
   );
 }
