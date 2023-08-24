@@ -18,12 +18,11 @@ import {
 } from "react-bootstrap";
 import { api } from "../utilities";
 
-export default function EquipmentChange({ equipment, appUser, setAppUser }) {
+export default function LocationAdd({ appUser, setAppUser }) {
   const [show, setShow] = useState(false);
-  const [location_id, setLocation_id] = useState(equipment.location_id);
-  const [name, setName] = useState(equipment.name);
-  const [buy_price, setBuy_price] = useState(equipment.buy_price);
-  const [sell_price, setSell_price] = useState(equipment.sell_price);
+  const [provider_id, setProvider_id] = useState(1);
+  const [name, setName] = useState("");
+  const [address, setAddress] = useState("");
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -41,39 +40,26 @@ export default function EquipmentChange({ equipment, appUser, setAppUser }) {
     localStorage.setItem("appUser", JSON.stringify(user));
   };
 
-  const changeEquipment = async (e) => {
+  const addLocation = async (e) => {
     e.preventDefault();
     e.stopPropagation();
     let response = await api
-      .put(`api/locations/${location_id}/equipments/${equipment.id}/`, {
+      .post(`api/locations/`, {
+        provider_id: provider_id,
         name: name,
-        buy_price: buy_price,
-        sell_price: sell_price,
+        address: address,
       })
       .catch((err) => {
         console.log(err);
-        alert("incorrect equipment update");
+        alert("incorrect location update");
       });
     getUser(e);
     setShow(false);
   };
-  const deleteEquipment = async (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    let response = await api
-      .delete(`api/locations/${location_id}/equipments/${equipment.id}/`, {})
-      .catch((err) => {
-        console.log(err);
-        alert("incorrect equipment update");
-      });
-    getUser(e);
-    setShow(false);
-  };
-
   return (
     <>
       <Button variant="primary" onClick={handleShow}>
-        {equipment.name.toUpperCase()}
+        Add Location
       </Button>
 
       <Modal
@@ -83,13 +69,25 @@ export default function EquipmentChange({ equipment, appUser, setAppUser }) {
         keyboard={false}
       >
         <Modal.Header closeButton>
-          <Modal.Title>Equipment Change</Modal.Title>
+          <Modal.Title>Location Add</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form onSubmit={changeEquipment}>
+          <Form onSubmit={addLocation}>
             <Form.Group
               className="mb-3"
-              controlId="changeEquipment.ControlInput2"
+              controlId="changeLocation.ControlInput0"
+            >
+              <Form.Label>Provider id</Form.Label>
+              <Form.Control
+                type="text"
+                value={provider_id}
+                placeholder=""
+                onChange={(e) => setProvider_id(e.target.value)}
+              />
+            </Form.Group>
+            <Form.Group
+              className="mb-3"
+              controlId="changeLocation.ControlInput1"
             >
               <Form.Label>Name</Form.Label>
               <Form.Control
@@ -101,37 +99,23 @@ export default function EquipmentChange({ equipment, appUser, setAppUser }) {
             </Form.Group>
             <Form.Group
               className="mb-3"
-              controlId="changeEquipment.ControlInput3"
+              controlId="changeLocation.ControlInput2"
             >
-              <Form.Label>Buy price</Form.Label>
+              <Form.Label>Address</Form.Label>
               <Form.Control
                 type="text"
-                value={buy_price}
+                value={address}
                 placeholder=""
-                onChange={(e) => setBuy_price(e.target.value)}
-              />
-            </Form.Group>{" "}
-            <Form.Group
-              className="mb-3"
-              controlId="changeEquipment.ControlInput4"
-            >
-              <Form.Label>Sell price</Form.Label>
-              <Form.Control
-                type="text"
-                value={sell_price}
-                placeholder=""
-                onChange={(e) => setSell_price(e.target.value)}
+                onChange={(e) => setAddress(e.target.value)}
               />
             </Form.Group>
-            <Button type="submit">Update</Button>
+
+            <Button type="submit">Add</Button>
           </Form>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Close
-          </Button>
-          <Button variant="danger" onClick={deleteEquipment}>
-            Delete
           </Button>
         </Modal.Footer>
       </Modal>

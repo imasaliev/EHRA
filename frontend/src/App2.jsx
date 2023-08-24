@@ -23,6 +23,10 @@ import { api } from "./utilities";
 import { useOutletContext } from "react-router-dom";
 import EquipmentCard from "./components/EquipmentCard";
 import logo from "./img/logo.svg";
+import EquipmentChange from "./modals/EquipmentChange";
+import LocationChange from "./modals/LocationChange";
+import EquipmentAdd from "./modals/EquipmentAdd";
+import LocationAdd from "./modals/LocationAdd";
 
 export default function App2() {
   const [email, setEmail] = useState("");
@@ -42,9 +46,6 @@ export default function App2() {
   const [currentPrice, setCurrentPrice] = useState(null);
   const [loading, setLoading] = useState(true); // Loading state flag
   const [showLogIn, setShowLogIn] = useState(false);
-  const [showECH, setShowECH] = useState(false);
-  const [showLCH, setShowLCH] = useState(false);
-
   const [showLogOut, setShowLogOut] = useState(false);
   const [showSignup, setShowSignup] = useState(false);
   const [validatedSignUp, setValidatedSignUp] = useState(false);
@@ -221,7 +222,7 @@ export default function App2() {
           <Modal.Body>
             <Form noValidate validated={validatedSignUp} onSubmit={signUp}>
               <Form.Group className="mb-3" controlId="login.ControlInput1">
-                <Form.Label>Email address</Form.Label>
+                <Form.Label>First name</Form.Label>
                 <Form.Control
                   required
                   type="text"
@@ -235,13 +236,12 @@ export default function App2() {
                 </Form.Control.Feedback>
               </Form.Group>
               <Form.Group className="mb-3" controlId="login.ControlInput1">
-                <Form.Label>Email address</Form.Label>
+                <Form.Label>Last name</Form.Label>
                 <Form.Control
                   required
                   type="text"
                   value={lastName}
                   placeholder="Doe"
-                  autoFocus
                   onChange={(e) => setLastName(e.target.value)}
                 />
                 <Form.Control.Feedback type="invalid">
@@ -255,7 +255,6 @@ export default function App2() {
                   type="email"
                   value={email}
                   placeholder="name@example.com"
-                  autoFocus
                   onChange={(e) => setEmail(e.target.value)}
                 />
                 <Form.Control.Feedback type="invalid">
@@ -329,107 +328,10 @@ export default function App2() {
         </Navbar.Collapse>
       </Navbar>
 
-      <Modal
-        show={showECH}
-        onHide={() => setShowECH(false)}
-        size="lg"
-        aria-labelledby="contained-modal-title-vcenter"
-        centered
-        className=""
-        backdrop="static"
-        keyboard={false}
-      >
-        <Modal.Header closeButton>
-          <Modal.Title>UPDATE EQUIPMENT</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          {modalChange.location_id}
-          {"  "}
-          {modalChange.id}
-          <Form noValidate validated={validatedSignUp} onSubmit={signUp}>
-            <Form.Group className="mb-3" controlId="login.ControlInput1">
-              <Form.Label>Location</Form.Label>
-              <Form.Control
-                required
-                type="text"
-                value={modalChange.location_id}
-                placeholder=" "
-                autoFocus
-                onChange={(e) => setFirstName(e.target.value)}
-              />
-              <Form.Control.Feedback type="invalid">
-                Please provide first name.
-              </Form.Control.Feedback>
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="login.ControlInput1">
-              <Form.Label>Email address</Form.Label>
-              <Form.Control
-                required
-                type="text"
-                value={lastName}
-                placeholder="Doe"
-                autoFocus
-                onChange={(e) => setLastName(e.target.value)}
-              />
-              <Form.Control.Feedback type="invalid">
-                Please provide last name.
-              </Form.Control.Feedback>
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="login.ControlInput1">
-              <Form.Label>Email address</Form.Label>
-              <Form.Control
-                required
-                type="email"
-                value={email}
-                placeholder="name@example.com"
-                autoFocus
-                onChange={(e) => setEmail(e.target.value)}
-              />
-              <Form.Control.Feedback type="invalid">
-                Please provide email address.
-              </Form.Control.Feedback>
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="login.ControlInput2">
-              <Form.Label>Password</Form.Label>
-              <Form.Control
-                required
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-              <Form.Control.Feedback type="invalid">
-                Please provide password.
-              </Form.Control.Feedback>
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Check
-                required
-                label="Agree to terms and conditions"
-                feedback="You must agree before submitting."
-                feedbackType="invalid"
-              />
-            </Form.Group>
-            <Button type="submit">SIGN UP</Button>
-          </Form>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="primary" onClick={() => alert("change")}>
-            SIGN UP
-          </Button>
-        </Modal.Footer>
-      </Modal>
-
       {appUser ? (
         <>
           {appUser.locations.length ? null : (
-            <h3
-              className="mb-3 d-flex justify-content-center"
-              onDoubleClick={() => {
-                alert(0);
-              }}
-            >
-              Double Click to add location
-            </h3>
+            <LocationAdd appUser={appUser} setAppUser={setAppUser} />
           )}
           <Tabs
             id="fill-tab-example"
@@ -439,28 +341,29 @@ export default function App2() {
             {appUser.locations.length ? (
               appUser.locations.map((location, indexL) => (
                 <Tab
+                  key={location.id}
                   eventKey={location.name}
-                  title={location.name}
-                  onDoubleClick={() => {
-                    setModalChange([indexL, 0]);
-                    alert(location.name);
-                  }}
+                  title={location.name.toUpperCase()}
                 >
                   <Row className="mb-3 d-flex justify-content-center">
+                    <LocationChange
+                      location={location}
+                      appUser={appUser}
+                      setAppUser={setAppUser}
+                    />
+                  </Row>
+
+                  <Row className="mb-3 d-flex justify-content-center">
                     {location.equipments.length
-                      ? location.equipments.map((equipment, indexE) => (
+                      ? location.equipments.map((equipment) => (
                           <Card
+                            key={equipment.id}
                             style={{
                               padding: 0,
-                              width: "8rem",
-                              height: "8rem",
+                              width: "10rem",
+                              height: "10rem",
                             }}
-                            className="bg-primary text-white text-center text-nowrap border-warning rounded-5"
-                            onDoubleClick={(e) => {
-                              e.stopPropagation();
-                              setModalChange(equipment);
-                              setShowECH(true);
-                            }}
+                            className="bg-primary text-white text-center text-nowrap rounded-5"
                           >
                             <Card.Body>
                               <Card.Text
@@ -477,9 +380,12 @@ export default function App2() {
                                   ? "SELL " + equipment.sell_price + "⬆️"
                                   : "NA"}
                               </Card.Text>
-                              <Card.Text className="text-uppercase">
-                                {equipment.name}{" "}
-                              </Card.Text>
+                              <EquipmentChange
+                                equipment={equipment}
+                                appUser={appUser}
+                                setAppUser={setAppUser}
+                              />
+
                               <Card.Text
                                 className={
                                   equipment.buy_price === null
@@ -500,14 +406,12 @@ export default function App2() {
                       : null}
                   </Row>
                   <Row className="mb-3 d-flex justify-content-center">
-                    <h3
-                      className="mb-3 d-flex justify-content-center"
-                      onDoubleClick={() => {
-                        alert(0);
-                      }}
-                    >
-                      Double Click to add equipment
-                    </h3>
+                    <LocationAdd appUser={appUser} setAppUser={setAppUser} />
+                    <EquipmentAdd
+                      location={location}
+                      appUser={appUser}
+                      setAppUser={setAppUser}
+                    />
                   </Row>
                   <Row>
                     <Chart
@@ -553,7 +457,7 @@ export default function App2() {
           </Tabs>
         </>
       ) : (
-        <h1>alsjdf;l</h1>
+        <img src={logo} />
       )}
     </div>
   );
