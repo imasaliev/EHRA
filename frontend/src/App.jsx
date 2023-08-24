@@ -8,9 +8,11 @@ export default function App() {
   const [appUser, setAppUser] = useState(
     JSON.parse(localStorage.getItem("appUser"))
   );
-  api.defaults.headers.common["Authorization"] = `Token ${localStorage.getItem(
-    "token"
-  )}`;
+  if (localStorage.getItem("token")) {
+    api.defaults.headers.common[
+      "Authorization"
+    ] = `Token ${localStorage.getItem("token")}`;
+  }
 
   return (
     <div className="container-fluid bg-secondary justify-content-center">
