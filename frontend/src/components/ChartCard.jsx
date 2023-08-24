@@ -40,7 +40,7 @@ export default function ChartCard({ provider, currentPrice, setCurrentPrice }) {
             provider.name.toUpperCase() +
             " CURRENT RATE: " +
             currentPrice +
-            "C  PER KWH. LAST UPDATE:  " +
+            "C  PER KWH. LAST UPDATE (CST):  " +
             new Date().toLocaleString(),
           align: "CENTER",
           margin: 10,

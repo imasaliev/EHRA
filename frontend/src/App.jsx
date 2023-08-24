@@ -2,11 +2,15 @@
 import { useEffect, useState } from "react";
 import NavbarCard from "./components/NavbarCard";
 import LocationCard from "./components/LocationCard";
+import { api } from "./utilities";
 
 export default function App() {
   const [appUser, setAppUser] = useState(
     JSON.parse(localStorage.getItem("appUser"))
   );
+  api.defaults.headers.common["Authorization"] = `Token ${localStorage.getItem(
+    "token"
+  )}`;
 
   return (
     <div className="container-fluid bg-secondary justify-content-center">
