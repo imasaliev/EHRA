@@ -29,6 +29,7 @@ export default function UserSignUp({ appUser, setAppUser }) {
   const handleShow = () => setShow(true);
 
   const signUpUser = async (e) => {
+    api.defaults.headers.common["Authorization"] = "";
     e.preventDefault();
     e.stopPropagation();
     let response = await api
