@@ -1,0 +1,182 @@
+[
+{
+  "model": "equipment_app.equipment",
+  "pk": 2,
+  "fields": {
+    "location_id": 2,
+    "name": "space heater",
+    "buy_price": "2.00",
+    "sell_price": null
+  }
+},
+{
+  "model": "equipment_app.equipment",
+  "pk": 3,
+  "fields": {
+    "location_id": 1,
+    "name": "Tesla Y",
+    "buy_price": "2.20",
+    "sell_price": "10.00"
+  }
+},
+{
+  "model": "equipment_app.equipment",
+  "pk": 6,
+  "fields": {
+    "location_id": 4,
+    "name": "dishwasher",
+    "buy_price": "2.40",
+    "sell_price": null
+  }
+},
+{
+  "model": "equipment_app.equipment",
+  "pk": 8,
+  "fields": {
+    "location_id": 1,
+    "name": "washer",
+    "buy_price": "2.60",
+    "sell_price": null
+  }
+},
+{
+  "model": "equipment_app.equipment",
+  "pk": 9,
+  "fields": {
+    "location_id": 1,
+    "name": "dryer",
+    "buy_price": "2.80",
+    "sell_price": null
+  }
+},
+{
+  "model": "equipment_app.equipment",
+  "pk": 10,
+  "fields": {
+    "location_id": 1,
+    "name": "gas generator",
+    "buy_price": null,
+    "sell_price": "10.00"
+  }
+},
+{
+  "model": "equipment_app.equipment",
+  "pk": 11,
+  "fields": {
+    "location_id": 1,
+    "name": "solar panels",
+    "buy_price": null,
+    "sell_price": "3.00"
+  }
+},
+{
+  "model": "equipment_app.equipment",
+  "pk": 12,
+  "fields": {
+    "location_id": 1,
+    "name": "porch lights",
+    "buy_price": "3.00",
+    "sell_price": null
+  }
+},
+{
+  "model": "equipment_app.equipment",
+  "pk": 13,
+  "fields": {
+    "location_id": 1,
+    "name": "flow battery",
+    "buy_price": "3.20",
+    "sell_price": "8.00"
+  }
+},
+{
+  "model": "equipment_app.equipment",
+  "pk": 14,
+  "fields": {
+    "location_id": 1,
+    "name": "acid battery",
+    "buy_price": "3.40",
+    "sell_price": "9.00"
+  }
+},
+{
+  "model": "equipment_app.equipment",
+  "pk": 15,
+  "fields": {
+    "location_id": 1,
+    "name": "water pump",
+    "buy_price": "3.60",
+    "sell_price": null
+  }
+},
+{
+  "model": "equipment_app.equipment",
+  "pk": 16,
+  "fields": {
+    "location_id": 1,
+    "name": "nissan leaf2",
+    "buy_price": "3.00",
+    "sell_price": "10.20"
+  }
+},
+{
+  "model": "equipment_app.equipment",
+  "pk": 17,
+  "fields": {
+    "location_id": 1,
+    "name": "tesla wall",
+    "buy_price": "4.00",
+    "sell_price": "8.00"
+  }
+},
+{
+  "model": "equipment_app.equipment",
+  "pk": 18,
+  "fields": {
+    "location_id": 1,
+    "name": "pool pump",
+    "buy_price": "4.20",
+    "sell_price": null
+  }
+},
+{
+  "model": "equipment_app.equipment",
+  "pk": 19,
+  "fields": {
+    "location_id": 1,
+    "name": "driveway heater",
+    "buy_price": "4.40",
+    "sell_price": null
+  }
+},
+{
+  "model": "equipment_app.equipment",
+  "pk": 20,
+  "fields": {
+    "location_id": 1,
+    "name": "wind gen",
+    "buy_price": null,
+    "sell_price": "8.00"
+  }
+},
+{
+  "model": "equipment_app.equipment",
+  "pk": 21,
+  "fields": {
+    "location_id": 1,
+    "name": "dehumidifier",
+    "buy_price": "2.50",
+    "sell_price": null
+  }
+},
+{
+  "model": "equipment_app.equipment",
+  "pk": 25,
+  "fields": {
+    "location_id": 4,
+    "name": "BYD",
+    "buy_price": "3.00",
+    "sell_price": "10.00"
+  }
+}
+]
