@@ -1,0 +1,42 @@
+[
+{
+  "model": "location_app.location",
+  "pk": 1,
+  "fields": {
+    "user_id": 3,
+    "provider_id": 1,
+    "name": "home",
+    "address": "1 main st, washington, dc, 11111"
+  }
+},
+{
+  "model": "location_app.location",
+  "pk": 2,
+  "fields": {
+    "user_id": 3,
+    "provider_id": 1,
+    "name": "work",
+    "address": "there"
+  }
+},
+{
+  "model": "location_app.location",
+  "pk": 4,
+  "fields": {
+    "user_id": 3,
+    "provider_id": 1,
+    "name": "other",
+    "address": "other"
+  }
+},
+{
+  "model": "location_app.location",
+  "pk": 15,
+  "fields": {
+    "user_id": 1,
+    "provider_id": 1,
+    "name": "mib",
+    "address": "mib"
+  }
+}
+]

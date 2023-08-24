@@ -1,0 +1,20 @@
+[
+{
+  "model": "provider_app.provider",
+  "pk": 1,
+  "fields": {
+    "name": "comed",
+    "current_rate_api": "https://hourlypricing.comed.com/api?type=currenthouraverage",
+    "last_24_hours_api": "https://hourlypricing.comed.com/api?type=5minutefeed"
+  }
+},
+{
+  "model": "provider_app.provider",
+  "pk": 2,
+  "fields": {
+    "name": "ameren",
+    "current_rate_api": "https://hourlypricing.comed.com/api?type=currenthouraverage",
+    "last_24_hours_api": "https://hourlypricing.comed.com/api?type=5minutefeed"
+  }
+}
+]
